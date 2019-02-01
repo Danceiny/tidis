@@ -19,7 +19,7 @@ from rediswrap import RedisWrapper
 class ListTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        print 'connect to 127.0.0.1:5379\n'
+        print('connect to 127.0.0.1:5379\n')
         cls.r = RedisWrapper('127.0.0.1', 5379).get_instance()
         cls.k1 = '__list1__'
         cls.k2 = '__list2__'
@@ -137,4 +137,4 @@ class ListTest(unittest.TestCase):
     def tearDownClass(cls):
         cls.r.execute_command('ldel', cls.k1)
         cls.r.execute_command('ldel', cls.k2)
-        print '\nclean up\n'
+        print('\nclean up\n')

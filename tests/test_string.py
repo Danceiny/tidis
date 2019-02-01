@@ -17,7 +17,7 @@ from rediswrap import RedisWrapper
 class StringTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        print 'connect to 127.0.0.1:5379\n'
+        print('connect to 127.0.0.1:5379\n')
         cls.r = RedisWrapper('127.0.0.1', 5379).get_instance()
         cls.k1 = '__string1__'
         cls.v1 = 'value1'
@@ -181,4 +181,4 @@ class StringTest(unittest.TestCase):
     def tearDownClass(cls):
         cls.r.delete(cls.k1)
         cls.r.delete(cls.k2)
-        print '\nclean up\n'
+        print('\nclean up\n')

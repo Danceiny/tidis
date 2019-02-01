@@ -19,7 +19,7 @@ from rediswrap import RedisWrapper
 class ZsetTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        print 'connect to 127.0.0.1:5379\n'
+        print('connect to 127.0.0.1:5379\n')
         cls.r = RedisWrapper('127.0.0.1', 5379).get_instance()
         cls.k1 = '__set1__'
         cls.k2 = '__set2__'
@@ -177,4 +177,4 @@ class ZsetTest(unittest.TestCase):
     def tearDownClass(cls):
         cls.r.execute_command('zclear', cls.k1)
         cls.r.execute_command('zclear', cls.k2)
-        print '\nclean up\n'
+        print('\nclean up\n')

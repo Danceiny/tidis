@@ -11,15 +11,18 @@ unit test for set type
 """
 
 import unittest
-import time
-import string
+
 import random
+import string
+import time
+
 from rediswrap import RedisWrapper
+
 
 class SetTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        print 'connect to 127.0.0.1:5379\n'
+        print('connect to 127.0.0.1:5379\n')
         cls.r = RedisWrapper('127.0.0.1', 5379).get_instance()
         cls.k1 = '__set1__'
         cls.k2 = '__set2__'
@@ -33,7 +36,7 @@ class SetTest(unittest.TestCase):
         self.r.execute_command('sclear', self.k3)
         pass
 
-    def random_string(n):
+    def random_string(self, n):
         return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(n))
 
     def test_sadd(self):
@@ -69,9 +72,9 @@ class SetTest(unittest.TestCase):
     def test_srem(self):
         for i in range(200):
             self.assertEqual(self.r.sadd(self.k1, str(i)), 1)
-        for i in range(10,100):
+        for i in range(10, 100):
             self.assertEqual(self.r.srem(self.k1, str(i)), 1)
-            self.assertEqual(self.r.scard(self.k1), 199+10-i)
+            self.assertEqual(self.r.scard(self.k1), 199 + 10 - i)
 
     def test_sdiff(self):
         for i in range(0, 150):
@@ -130,7 +133,7 @@ class SetTest(unittest.TestCase):
     def test_spexpireat(self):
         self.assertEqual(self.r.sadd(self.k1, self.v1), 1)
         # expire in 5s
-        ts = int(round(time.time()*1000)) + 5000
+        ts = int(round(time.time() * 1000)) + 5000
         self.assertTrue(self.r.execute_command('spexpireat', self.k1, ts))
         self.assertLessEqual(self.r.execute_command('spttl', self.k1), 5000)
         self.assertEqual(self.r.scard(self.k1), 1)
@@ -164,4 +167,4 @@ class SetTest(unittest.TestCase):
         cls.r.execute_command('sclear', cls.k1)
         cls.r.execute_command('sclear', cls.k2)
         cls.r.execute_command('sclear', cls.k3)
-        print '\nclean up\n'
+        print('\nclean up\n')

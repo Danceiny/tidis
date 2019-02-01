@@ -17,7 +17,7 @@ from rediswrap import RedisWrapper
 class HashTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        print 'connect to 127.0.0.1:5379\n'
+        print('connect to 127.0.0.1:5379\n')
         cls.r = RedisWrapper('127.0.0.1', 5379).get_instance()
         cls.k1 = '__hash1__'
         cls.k2 = '__hash2__'
@@ -135,4 +135,4 @@ class HashTest(unittest.TestCase):
     def tearDownClass(cls):
         cls.r.execute_command('hclear', cls.k1)
         cls.r.execute_command('hclear', cls.k2)
-        print '\nclean up\n'
+        print('\nclean up\n')
